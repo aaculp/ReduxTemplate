@@ -4,7 +4,7 @@ import {
     GET_POSTS
 } from '../types'
 
-export const getPosts = () => ({
+export const getPosts = (homstPosts, page, order, limit) => ({
     type: GET_POSTS,
-    payload: api.getPosts()
+    payload: api.getPosts(homstPosts, page, order, limit)
 })
