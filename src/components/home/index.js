@@ -1,9 +1,10 @@
 import React from 'react';
+import HomePost from './homePosts.js'
 
 const Home = () => {
     return (
         <>
-            Home
+            <HomePost />
         </>
     )
 
