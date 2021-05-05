@@ -15,3 +15,42 @@ export const getPosts = async (prevState, page = 1, order = 'asc', limit = "10")
         throw error
     }
 }
+
+export const addNewsletter = async (data) => {
+    try {
+        const findUser = await axios.get(`${URL_SERVER}/newsletter?email=${data.email}`);
+
+        if (!Array.isArray(findUser.data) || !findUser.data.length) {
+            //add user
+            const response = await axios({
+                method: "POST",
+                url: `${URL_SERVER}/newsletter`,
+                data: {
+                    email: data.email
+                }
+            })
+
+            return {
+                newsletter: 'added',
+                email: response.data
+            }
+        } else {
+            // user already added
+            return {
+                newsletter: 'failed',
+            }
+        }
+    } catch (error) {
+        throw error
+    }
+}
+
+export const getPostById = async (id) => {
+    try {
+        const response = await axios.get(`${URL_SERVER}/posts/${id}`)
+
+        return response.data
+    } catch (error) {
+        return '404 Error'
+    }
+}
